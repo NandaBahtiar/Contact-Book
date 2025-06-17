@@ -1,0 +1,21 @@
+package ContactBook.Contact.Book.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "contact")
+@Builder
+public class Contac {
+        @Id
+        @GeneratedValue(strategy = GenerationType.UUID)
+        @Column(name = "id", nullable = false)
+        private String id;
+        private String name;
+        private String email;
+        private String phone;
+
+}

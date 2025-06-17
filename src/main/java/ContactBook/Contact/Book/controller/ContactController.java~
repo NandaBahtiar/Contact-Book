@@ -1,0 +1,66 @@
+package ContactBook.Contact.Book.controller;
+
+import ContactBook.Contact.Book.dto.request.ContactRequestDto;
+import ContactBook.Contact.Book.dto.respon.CommonResponDto;
+import ContactBook.Contact.Book.dto.respon.ContactResponDto;
+import ContactBook.Contact.Book.service.ContactService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*; // Import anotasi GetMapping dan PathVariable
+
+import java.util.List; // Import List
+
+@RequiredArgsConstructor
+@RestController
+@RequestMapping("/contact")
+public class ContactController {
+
+    private final ContactService contactService;
+
+    @PostMapping
+    public ResponseEntity<?> addContact(@RequestBody ContactRequestDto req) {
+        ContactResponDto contactResponDto = contactService.addContact(req);
+        CommonResponDto<ContactResponDto> commonResponDto = CommonResponDto.<ContactResponDto>builder()
+                .statusCode(HttpStatus.CREATED.value())
+                .message("Successfully created new contact")
+                .data(contactResponDto)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(commonResponDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> getAllContact() {
+        List<ContactResponDto> contactList = contactService.findAllContact();
+        CommonResponDto<List<ContactResponDto>> commonResponDto = CommonResponDto.<List<ContactResponDto>>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("Successfully fetched all contacts")
+                .data(contactList)
+                .build();
+        return ResponseEntity.ok(commonResponDto);
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getContactById(@PathVariable String id) {
+        ContactResponDto contactResponDto = contactService.findContactById(id);
+        CommonResponDto<ContactResponDto> commonResponDto = CommonResponDto.<ContactResponDto>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("Successfully fetched contact")
+                .data(contactResponDto)
+                .build();
+        return ResponseEntity.ok(commonResponDto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateContact(@PathVariable String id, @RequestBody ContactRequestDto req) {
+        ContactResponDto contactResponDto = contactService.updateContact(id, req);
+        CommonResponDto<ContactResponDto> commonResponDto = CommonResponDto.<ContactResponDto>builder()
+                .statusCode(HttpStatus.OK.value())
+                .message("Successfully updated contact")
+                .data(contactResponDto)
+                .build();
+        return ResponseEntity.ok(commonResponDto);
+    }
+
+}

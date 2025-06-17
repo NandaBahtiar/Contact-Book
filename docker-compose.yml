@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # Layanan untuk Database PostgreSQL
+  db:
+    image: postgres:15 # Gunakan versi postgres yang Anda inginkan
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres       # Ganti dengan username Anda
+      POSTGRES_PASSWORD: 123 # Ganti dengan password Anda
+      POSTGRES_DB: contac_book # Ganti dengan nama database Anda
+    ports:
+      - "5432:5432" # Memetakan port agar bisa diakses dari luar (misal dgn DBeaver)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Layanan untuk Aplikasi Spring Boot Anda
+  app:
+    build: . # Perintahkan untuk build dari Dockerfile di direktori ini
+    container_name: contact_book_apps
+    restart: on-failure
+    depends_on:
+      - db # Pastikan 'db' dijalankan terlebih dahulu sebelum 'app'
+    ports:
+      - "8082:8080" # Ganti 8080 sesuai port aplikasi Anda
+    environment:
+      # Arahkan aplikasi ke layanan 'db' yang didefinisikan di atas
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/contac_book
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 123
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+volumes:
+  postgres_data:

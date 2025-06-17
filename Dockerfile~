@@ -1,0 +1,14 @@
+# Gunakan base image yang berisi Java
+FROM openjdk:17-jdk-slim
+
+# Tetapkan argumen untuk file JAR
+ARG JAR_FILE=target/*.jar
+
+# Salin file JAR dari hasil build ke dalam image
+COPY ${JAR_FILE} app.jar
+
+# Tentukan port yang akan diekspos oleh aplikasi
+EXPOSE 8080
+
+# Perintah untuk menjalankan aplikasi saat container dimulai
+ENTRYPOINT ["java","-jar","/app.jar"]
