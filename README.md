@@ -40,7 +40,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repo**
     ```sh
-    git clone [https://github.com/NandaBahtiar/Contact-Book](https://github.com/NandaBahtiar/Contact-Book)
+    git clone https://github.com/NandaBahtiar/Contact-Book
     ```
 2.  **Navigate to the project directory**
     ```sh
