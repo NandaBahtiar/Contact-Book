@@ -1,7 +1,6 @@
 # Contact Book API
 
-This is a simple RESTful API for a Contact Book application built with Spring Boot. It allows you to perform basic CRUD (Create, Read, Update, Delete) operations on contacts.
-
+This is a simple RESTful API for a Contact Book application built with Spring Boot. This API allows you to perform basic CRUD (Create, Read, Update, Delete) operations on contacts. this project is a test from maybank
 ## About The Project
 
 This project provides a backend service for managing a list of contacts. Each contact has a name, email, and phone number. The API is secured, requiring authentication for all endpoints.
