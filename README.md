@@ -123,4 +123,6 @@ The API provides the following endpoints, all under the base path `/contact`.
 [cite_start]The project follows a standard Maven project structure.
 
 ## Docker images
-* docker pull nandabahtiar123/contact-book
+```sh
+docker pull nandabahtiar123/contact-book
+```
