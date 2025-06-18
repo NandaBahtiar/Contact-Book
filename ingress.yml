@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: contact-book-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: / # Opsional: jika path perlu ditulis ulang
+spec:
+  rules:
+    - host: contactbook.example.com # Ganti dengan domain Anda
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: contact-book-app-service
+                port:
+                  number: 8082 # Port Service aplikasi Anda

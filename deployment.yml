@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: contact-book-app-deployment
+  labels:
+    app: contact-book-app
+spec:
+  replicas: 1 # Anda bisa mengubah jumlah replika sesuai kebutuhan
+  selector:
+    matchLabels:
+      app: contact-book-app
+  template:
+    metadata:
+      labels:
+        app: contact-book-app
+    spec:
+      containers:
+        - name: contact-book-app
+          image: your-docker-registry/your-image-name:tag # Ganti dengan image Docker Anda
+          ports:
+            - containerPort: 8080 # Port aplikasi di dalam container
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres-db-service:5432/contac_book
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "123"
+            - name: SPRING_JPA_HIBERNATE_DDL_AUTO
+              value: update
+          livenessProbe:
+            httpGet:
+              path: /actuator/health # Jika Anda menggunakan Spring Boot Actuator
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /actuator/health # Jika Anda menggunakan Spring Boot Actuator
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+        - name: postgres-db
+          image: postgres:15 # Versi PostgreSQL sesuai docker-compose.yml 
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: "123"
+            - name: POSTGRES_DB
+              value: contac_book
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: postgres-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: postgres-storage
+          emptyDir: {} # **TIDAK DISARANKAN UNTUK PRODUKSI.** Gunakan PersistentVolumeClaim untuk data persisten.
