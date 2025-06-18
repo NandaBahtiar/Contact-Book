@@ -18,10 +18,10 @@ This project provides a backend service for managing a list of contacts. Each co
 This project is built using the following technologies:
 
 * [Spring Boot](https://spring.io/projects/spring-boot)
-* [cite_start][Spring Web](https://docs.spring.io/spring-boot/3.5.0/reference/web/servlet.html) 
-* [cite_start][Spring Data JPA](https://docs.spring.io/spring-boot/3.5.0/reference/data/sql.html#data.sql.jpa-and-spring-data) 
-* [cite_start][Spring Security](https://docs.spring.io/spring-boot/3.5.0/reference/web/spring-security.html) 
-* [cite_start][Maven](https://maven.apache.org/guides/index.html) 
+* [Spring Web](https://docs.spring.io/spring-boot/3.5.0/reference/web/servlet.html) 
+* [Spring Data JPA](https://docs.spring.io/spring-boot/3.5.0/reference/data/sql.html#data.sql.jpa-and-spring-data) 
+* [Spring Security](https://docs.spring.io/spring-boot/3.5.0/reference/web/spring-security.html) 
+* [Maven](https://maven.apache.org/guides/index.html) 
 * [PostgreSQL](https://www.postgresql.org/)
 * [Lombok](https://projectlombok.org/)
 
@@ -66,7 +66,7 @@ The API provides the following endpoints, all under the base path `/contact`.
 ### Add Contact
 
 * **Endpoint:** `POST /contact`
-* [cite_start]**Description:** Adds a new contact to the database. 
+* **Description:** Adds a new contact to the database. 
 * **Request Body:**
     ```json
     {
@@ -76,14 +76,14 @@ The API provides the following endpoints, all under the base path `/contact`.
     }
     ```
 * **Response:**
-    [cite_start]Returns a common response object with the status code, a success message, and the newly created contact's details. 
+    Returns a common response object with the status code, a success message, and the newly created contact's details. 
 
 ### Get All Contacts
 
 * **Endpoint:** `GET /contact`
-* [cite_start]**Description:** Retrieves a list of all contacts. 
+* **Description:** Retrieves a list of all contacts. 
 * **Response:**
-    [cite_start]Returns a common response object with the status code, a success message, and a list of all contacts. 
+    Returns a common response object with the status code, a success message, and a list of all contacts. 
 
 ### Get Contact by ID
 
@@ -95,7 +95,7 @@ The API provides the following endpoints, all under the base path `/contact`.
 ### Update Contact
 
 * **Endpoint:** `PUT /contact/{id}`
-* [cite_start]**Description:** Updates the details of an existing contact. 
+* **Description:** Updates the details of an existing contact. 
 * **Request Body:**
     ```json
     {
@@ -105,22 +105,22 @@ The API provides the following endpoints, all under the base path `/contact`.
     }
     ```
 * **Response:**
-    [cite_start]Returns a common response object with the status code, a success message, and the updated contact's details. 
+    Returns a common response object with the status code, a success message, and the updated contact's details. 
 
 ### Delete Contact
 
 * **Endpoint:** `DELETE /contact/{id}`
-* [cite_start]**Description:** Deletes a contact by its ID. 
+* **Description:** Deletes a contact by its ID. 
 * **Response:**
-    [cite_start]Returns a common response object with the status code and a success message. 
+    Returns a common response object with the status code and a success message. 
 
 ## Security
 
-[cite_start]The application is configured with Spring Security.  [cite_start]By default, all requests to any endpoint must be authenticated.  [cite_start]The security configuration disables CSRF protection to allow for easier testing with tools like Postman. 
+The application is configured with Spring Security.  By default, all requests to any endpoint must be authenticated.  The security configuration disables CSRF protection to allow for easier testing with tools like Postman. 
 
 ## Project Structure
 
-[cite_start]The project follows a standard Maven project structure.
+The project follows a standard Maven project structure.
 
 ## Docker images
 ```sh
